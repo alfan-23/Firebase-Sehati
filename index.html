@@ -5,189 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEHATI - AI | Login Fasyankes</title>
     
-    <!-- SCRIPT LISENSI GITHUB SEMENTARA DIHAPUS AGAR BISA DITEST LOKAL -->
+    <script>
+        (function() {
+            const allowedDomain = "alfan-23.github.io";
+            const currentDomain = window.location.hostname;
+            if (currentDomain !== allowedDomain && currentDomain !== "localhost" && currentDomain !== "127.0.0.1") {
+                document.documentElement.innerHTML = `
+                    <div style="display:flex; justify-content:center; align-items:center; height:100vh; background-color:#0f172a; color:#38bdf8; font-family:sans-serif; text-align:center; padding:20px;">
+                        <div>
+                            <h1 style="font-size:1.8rem; margin-bottom:10px;">⚠️ LISENSI TIDAK VALID</h1>
+                            <p>Akses hanya diizinkan melalui domain resmi: <b>${allowedDomain}</b></p>
+                        </div>
+                    </div>`;
+                throw new Error("Unauthorized Access");
+            }
+        })();
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 
-                        navy: '#0f172a', 
-                        darkblue: '#1e293b',
-                        skyblue: '#38bdf8',
-                        vibrant: '#0ea5e9'
-                    },
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-                    animation: {
-                        'blob': 'blob 7s infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
     <style>
-        body { 
-            background: #0f172a;
-            background: radial-gradient(circle at top right, #1e293b, #090e1a);
-            color: #f8fafc;
-            overflow-x: hidden;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        .input-glow:focus {
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
-            border-color: #38bdf8;
+
+        .input-glass {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: white;
+            transition: all 0.3s ease;
         }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
+
+        .input-glass:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+            outline: none;
+        }
+
+        /* Abstract Shapes */
+        .shape {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(20, 184, 166, 0.15); /* Teal */
+            top: -100px;
+            left: -100px;
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(16, 185, 129, 0.1); /* Emerald */
+            bottom: -150px;
+            right: -100px;
+            border-radius: 50%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+            100% { transform: translate(-30px, 50px) scale(0.9); }
+        }
+
+        .loader-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            border-radius: inherit;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(20, 184, 166, 0.3);
+            border-radius: 50%;
+            border-top-color: #14b8a6;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        select option {
+            background-color: #1e293b;
+            color: white;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 md:p-6 relative">
+<body class="p-4 sm:p-6 lg:p-8">
 
-    <div class="fixed inset-0 w-full h-full overflow-hidden -z-10 pointer-events-none flex justify-center items-center">
-        <div class="absolute top-[10%] left-[20%] w-72 h-72 bg-skyblue opacity-20 blur-[100px] rounded-full mix-blend-screen animate-blob"></div>
-        <div class="absolute top-[20%] right-[20%] w-72 h-72 bg-vibrant opacity-20 blur-[100px] rounded-full mix-blend-screen animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[10%] left-[40%] w-80 h-80 bg-indigo-500 opacity-20 blur-[120px] rounded-full mix-blend-screen animate-blob animation-delay-4000"></div>
-    </div>
+    <!-- Background Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
 
-    <div class="w-full max-w-[1000px] flex flex-col md:flex-row items-stretch gap-8 md:gap-4 opacity-0 animate-fade-in-up">
+    <div class="w-full max-w-md w-full glass-panel rounded-3xl p-8 relative">
         
-        <div class="md:w-1/2 p-4 md:p-12 flex flex-col justify-center text-center md:text-left z-10">
-            <div class="inline-flex items-center gap-4 mb-6 justify-center md:justify-start">
-                <div class="w-14 h-14 bg-gradient-to-br from-skyblue to-vibrant rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(56,189,248,0.4)]">
-                    <i class="fa-solid fa-hospital-user text-white text-2xl"></i>
-                </div>
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">SEHATI - AI</h1>
-            </div>
-            
-            <h2 class="text-2xl md:text-3xl font-bold text-skyblue mb-5 leading-snug">
-                Solusi Cerdas <br class="hidden md:block">Administrasi Kesehatan
-            </h2>
-            <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-10">
-                Platform terintegrasi untuk asistensi penyusunan dokumen layanan kesehatan berbasis kecerdasan buatan, disesuaikan dengan standar akreditasi fasyankes.
-            </p>
-            
-            <div class="grid grid-cols-2 gap-4 hidden md:grid">
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group">
-                    <div class="w-8 h-8 rounded-full bg-skyblue/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-bolt text-skyblue text-sm"></i>
-                    </div>
-                    <span class="font-semibold text-slate-200 text-sm block">Proses Instan</span>
-                    <span class="text-xs text-slate-500 mt-1 block">Efisiensi dokumen</span>
-                </div>
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group">
-                    <div class="w-8 h-8 rounded-full bg-skyblue/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-shield-check text-skyblue text-sm"></i>
-                    </div>
-                    <span class="font-semibold text-slate-200 text-sm block">Akses Valid</span>
-                    <span class="text-xs text-slate-500 mt-1 block">Sistem approval pusat</span>
-                </div>
-            </div>
+        <!-- Loader -->
+        <div id="loader" class="loader-overlay hidden rounded-3xl">
+            <div class="spinner mb-4"></div>
+            <p class="text-teal-400 font-semibold animate-pulse text-sm" id="loader-text">Menghubungkan ke Database...</p>
         </div>
 
-        <div class="md:w-1/2 z-10">
-            <div class="glass-card rounded-[2rem] p-8 md:p-10 relative overflow-hidden">
-                <div class="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-skyblue/20 to-transparent rounded-full blur-xl"></div>
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-teal-500/20 to-emerald-500/20 border border-teal-500/30 mb-4 shadow-lg shadow-teal-500/10">
+                <i class="fas fa-heartbeat text-2xl text-teal-400"></i>
+            </div>
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-300 tracking-tight mb-2">
+                SEHATI - AI
+            </h1>
+            <p class="text-slate-400 text-sm font-medium">Sistem Evaluasi Mutu & Layanan Fasyankes</p>
+        </div>
 
-                <div class="mb-8">
-                    <h3 class="text-3xl font-bold text-white mb-2">Selamat Datang</h3>
-                    <p class="text-slate-400 text-sm">Masukkan kredensial fasyankes Anda.</p>
+        <!-- Form -->
+        <form class="space-y-6">
+            
+            <div class="space-y-2">
+                <label class="text-sm font-semibold text-slate-300 ml-1">Kategori Fasyankes</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-hospital text-slate-400"></i>
+                    </div>
+                    <select id="loginFasyankes" required class="input-glass w-full pl-11 pr-4 py-3.5 rounded-xl text-sm appearance-none cursor-pointer">
+                        <option value="" disabled selected>Pilih Kategori...</option>
+                        <option value="Dinkes">Dinas Kesehatan (Admin)</option>
+                        <option value="Puskesmas">Puskesmas</option>
+                        <option value="Klinik">Klinik</option>
+                        <option value="Rumah Sakit">Rumah Sakit</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                        <i class="fas fa-chevron-down text-slate-400 text-xs"></i>
+                    </div>
                 </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-sm font-semibold text-slate-300 ml-1">Email / Username</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-envelope text-slate-400"></i>
+                    </div>
+                    <input id="loginEmail" type="email" required placeholder="Masukkan email terdaftar" 
+                           class="input-glass w-full pl-11 pr-4 py-3.5 rounded-xl text-sm placeholder-slate-500">
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-sm font-semibold text-slate-300 ml-1">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-lock text-slate-400"></i>
+                    </div>
+                    <input id="loginPassword" type="password" required placeholder="••••••••" 
+                           class="input-glass w-full pl-11 pr-12 py-3.5 rounded-xl text-sm placeholder-slate-500">
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <button type="button" onclick="window.togglePassword('loginPassword', 'eyeIcon')" class="text-slate-400 hover:text-teal-400 focus:outline-none p-2 transition-colors">
+                            <i id="eyeIcon" class="fas fa-eye-slash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 space-y-3">
+                <button type="button" onclick="window.handleLogin(event)" class="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-teal-900/50 text-sm font-bold text-white bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-400 hover:to-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:ring-offset-slate-900 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-sign-in-alt mr-2 mt-1"></i> Masuk ke Sistem
+                </button>
                 
-                <form class="space-y-5">
-                    <div class="space-y-2 group">
-                        <label class="block text-[10px] font-black text-skyblue uppercase tracking-[0.2em] ml-1 opacity-80 group-focus-within:opacity-100 transition-opacity">Kategori Layanan</label>
-                        <div class="relative">
-                            <select id="loginFasyankes" required class="w-full bg-darkblue/40 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm text-white outline-none input-glow transition-all appearance-none cursor-pointer">
-                                <option value="" class="bg-navy">Pilih Jenis Fasyankes</option>
-                                <option value="Dinkes" class="bg-navy">Dinas Kesehatan (Admin)</option>
-                                <option value="Puskesmas" class="bg-navy">Puskesmas</option>
-                                <option value="Klinik" class="bg-navy">Klinik / Praktik Mandiri</option>
-                                <option value="Rumah Sakit" class="bg-navy">Rumah Sakit</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 group">
-                        <label class="block text-[10px] font-black text-skyblue uppercase tracking-[0.2em] ml-1 opacity-80 group-focus-within:opacity-100 transition-opacity">Email Terdaftar</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs group-focus-within:text-skyblue transition-colors"></i>
-                            <input type="email" id="loginEmail" required class="w-full bg-darkblue/40 border border-slate-700/80 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white outline-none input-glow transition-all" placeholder="admin@fasyankes.id">
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 group">
-                        <label class="block text-[10px] font-black text-skyblue uppercase tracking-[0.2em] ml-1 opacity-80 group-focus-within:opacity-100 transition-opacity">Kata Sandi</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs group-focus-within:text-skyblue transition-colors"></i>
-                            <input type="password" id="loginPassword" required class="w-full bg-darkblue/40 border border-slate-700/80 rounded-xl pl-11 pr-12 py-3.5 text-sm text-white outline-none input-glow transition-all" placeholder="••••••••">
-                            <button type="button" onclick="window.togglePassword('loginPassword', 'eyeIconLogin')" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-skyblue transition-colors outline-none focus:outline-none">
-                                <i id="eyeIconLogin" class="fa-solid fa-eye-slash text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- TOMBOL MASUK -->
-                    <button type="button" onclick="window.handleLogin(event)" class="w-full bg-gradient-to-r from-skyblue to-vibrant text-white font-extrabold py-4 rounded-xl transition-all hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 mt-6 uppercase tracking-wider text-sm flex justify-center items-center gap-2">
-                        <span>Masuk ke Dashboard</span>
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                    </button>
-                </form>
-
-                <div class="mt-8 pt-6 border-t border-white/10 text-center">
-                    <p class="text-xs text-slate-400">
-                        Belum memiliki akses fasyankes? <br class="md:hidden mt-1">
-                        <!-- LINK INI SEKARANG BERFUNGSI UNTUK DAFTAR KE FIREBASE -->
-                        <a href="#" onclick="window.handleSignup(event)" class="text-skyblue font-bold hover:text-white hover:underline transition-colors ml-1">Registrasi Akun Baru (Langsung)</a>
-                    </p>
-                </div>
+                <button type="button" onclick="window.handleSignup(event)" class="w-full flex justify-center py-3 px-4 border border-teal-500/50 rounded-xl text-sm font-bold text-teal-400 bg-transparent hover:bg-teal-500/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:ring-offset-slate-900 transition-all duration-300">
+                    <i class="fas fa-user-plus mr-2 mt-1"></i> Daftar Fasyankes Baru
+                </button>
             </div>
+            
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-xs text-slate-500 font-medium">
+                Dilindungi oleh Sistem Keamanan Terpusat<br>
+                Dinas Kesehatan &copy; 2026
+            </p>
         </div>
     </div>
 
-    <div id="loader" class="hidden fixed inset-0 z-50 bg-navy/95 backdrop-blur-xl flex flex-col justify-center items-center">
-        <div class="relative">
-            <div class="w-16 h-16 border-4 border-slate-700 border-t-skyblue rounded-full animate-spin"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <i class="fa-solid fa-shield-check text-skyblue"></i>
-            </div>
-        </div>
-        <p class="text-skyblue font-bold text-xs mt-6 tracking-[0.3em] uppercase animate-pulse" id="loader-text">Memverifikasi Akses...</p>
-    </div>
-
-    <!-- MESIN FIREBASE -->
+    <!-- PENGGUNAAN TYPE MODULE UNTUK FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+        // Konfigurasi Firebase dari akun Anda
         const firebaseConfig = {
             apiKey: "AIzaSyD4oU8FaCptnhcnJbivKMHQgQaKFEcYCrc",
             authDomain: "sehati-ai-c5252.firebaseapp.com",
@@ -201,7 +239,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // FUNGSI MATA PASSWORD
+        // Fungsi Tampilkan/Sembunyikan Password
         window.togglePassword = function(inputId, iconId) {
             const input = document.getElementById(inputId);
             const icon = document.getElementById(iconId);
@@ -216,7 +254,7 @@
             }
         }
 
-        // FUNGSI MASUK (LOGIN)
+        // Fungsi LOGIN
         window.handleLogin = async function(e) {
             e.preventDefault();
             
@@ -244,19 +282,22 @@
                         sessionStorage.setItem('unitKerja', data.unitKerja || email);
                         sessionStorage.setItem('kategori', data.kategori || fasyankes);
                         
-                        window.location.href = 'dashboard.html'; 
+                        // KITA UBAH REDIRECT-NYA KE iframe.html AGAR BISA MASUK DASHBOARD
+                        window.location.href = 'iframe.html'; 
                     } else {
-                        alert("Akses Ditolak: Akun Anda masih PENDING. Silakan tunggu persetujuan Admin Dinkes.");
-                        await signOut(auth);
+                        alert("Akses Ditolak: Akun Anda berstatus PENDING. Silakan tunggu persetujuan Admin Dinkes.");
+                        await signOut(auth); // Langsung logout jika belum disetujui
                     }
                 } else {
-                    alert("Akses Ditolak: Data tidak ditemukan di Database.");
+                    alert("Akses Ditolak: Data Fasyankes tidak ditemukan di Database.");
                     await signOut(auth);
                 }
             } catch (err) {
                 let errorMsg = "Koneksi Gagal.";
                 if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
                     errorMsg = "Email atau Password Salah!";
+                } else if (err.code === 'auth/invalid-email') {
+                    errorMsg = "Format Email tidak valid.";
                 }
                 alert("Akses Ditolak: " + errorMsg);
             } finally {
@@ -264,7 +305,7 @@
             }
         }
 
-        // FUNGSI DAFTAR BARU (SIGN UP) DARI TULISAN BAWAH
+        // Fungsi SIGN UP MANDIRI
         window.handleSignup = async function(e) {
             e.preventDefault();
             
@@ -273,7 +314,7 @@
             const pass = document.getElementById('loginPassword').value;
 
             if(!email || !pass || !fasyankes) {
-                alert("CARA DAFTAR: Pilih Kategori, isi Email, dan buat Password di atas, lalu klik tulisan Registrasi Akun Baru ini.");
+                alert("Untuk mendaftar, harap pilih Kategori Fasyankes, isi Email dan buat Password.");
                 return;
             }
             if(pass.length < 6) {
@@ -295,15 +336,15 @@
                     created_at: new Date()
                 });
 
-                alert("Pendaftaran Berhasil!\n\nData telah masuk ke Database Dinkes. Status Anda saat ini PENDING menunggu persetujuan.");
+                alert("Pendaftaran Berhasil!\n\nStatus akun Anda saat ini PENDING. Silakan hubungi Admin Dinkes untuk persetujuan sebelum bisa Masuk ke Sistem.");
                 await signOut(auth); 
                 
             } catch (err) {
+                let errorMsg = err.message;
                 if (err.code === 'auth/email-already-in-use') {
-                    alert("Email ini sudah terdaftar. Silakan langsung klik tombol 'Masuk ke Dashboard'.");
-                } else {
-                    alert("Pendaftaran Gagal: " + err.message);
+                    errorMsg = "Email sudah terdaftar. Silakan langsung Masuk ke Sistem.";
                 }
+                alert("Pendaftaran Gagal: " + errorMsg);
             } finally {
                 document.getElementById('loader').classList.add('hidden');
             }
